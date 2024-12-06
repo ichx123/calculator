@@ -22,9 +22,9 @@ function divide(num1, num2) {
 }
 
  //Basic variables for using the calculator
- let num1;
- let num2;
- let operator;
+ let num1 = null;
+ let num2 = null;
+ let operator = null;
  let displayValue = "";
 
 //Function to operate the cakculator with the given input
@@ -73,8 +73,15 @@ operatorButtons.forEach(operator => {
 
 function addOperator() {
     const selectedOperator = this.value;
-    num1 = Number(displayValue);
-    operator = selectedOperator;
+    if (num1 === null) {
+        num1 = Number(displayValue);
+        operator = selectedOperator; 
+    } else {
+        num2 = Number(displayValue);
+        num1 = operate(num1, num2, operator);
+        operator = selectedOperator;
+        num2 = null;
+    }
     displayValue = "";
     updateUI();
 }
