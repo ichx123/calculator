@@ -72,13 +72,16 @@ operatorButtons.forEach(operator => {
 
 function addOperator() {
     const selectedOperator = this.value;
+    //If there is no number stored in num1, store it and set the selected operator (first round)
     if (num1 === null) {
         num1 = Number(displayValue);
         operator = selectedOperator;
         displayValue = "";
+    //If there is a number stored in num1, but the operator is null, because the user clicked on "=" before, store the selected operator and go on to get the second number
     } else if (operator === null) {
         operator = selectedOperator;
         displayValue = "";
+    //If the user clicked twice on a operator, take the number on the display and store it to num2, get the result and store it to num1, show the result on the display and then store the selected operator to go on and get the next number
     } else {
         num2 = Number(displayValue);
         num1 = operate(num1, num2, operator);
@@ -95,7 +98,7 @@ resultButton.addEventListener("click", getResult);
 
 function getResult() {
     if (operator === null) {
-        //displayValue = ""; //Wenn noch kein Operator eingegeben wurde, aber mehrmals auf "=" geklickt wird, soll kein Ergebnis angezeigt werden
+        displayValue = ""; //Wenn noch kein Operator eingegeben wurde, aber mehrmals auf "=" geklickt wird, soll kein Ergebnis angezeigt werden
     } else {
         num2 = Number(displayValue);
         displayValue = operate(num1, num2, operator);
@@ -116,4 +119,17 @@ function clearCalcuator() {
     operator = null;
     displayValue = "";
     updateUI();
+}
+
+const floatingPointButton = document.querySelector("#floating-point");
+floatingPointButton.addEventListener("click", addFloatingPoint); 
+
+function addFloatingPoint() {
+    let displayValueArray = displayValue.split("");
+    if (displayValueArray.includes(".")) {
+        this.disabled = true;
+    } else {
+        displayValue += this.value;
+    }
+
 }
