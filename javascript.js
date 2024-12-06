@@ -47,8 +47,8 @@ function operate(num1, num2, operator) {
 //Function to update the Display-Values
 function updateUI() {
     const display = document.querySelector(".result");
-    if (displayValue == "") {
-        display.textContent == "0";
+    if (displayValue === "") {
+        display.textContent = "0";
     } else {
     display.textContent = displayValue; 
     }
@@ -85,5 +85,16 @@ resultButton.addEventListener("click", getResult);
 function getResult() {
     num2 = Number(displayValue);
     displayValue = operate(num1, num2, operator);
+    updateUI();
+}
+
+const clearButton = document.querySelector("#clear");
+clearButton.addEventListener("click", clearCalcuator);
+
+function clearCalcuator() {
+    num1 = null;
+    num2 = null;
+    operator = null;
+    displayValue = "";
     updateUI();
 }
