@@ -9,30 +9,29 @@ function substract(num1, num2) {
 }
 
 function multiply(num1, num2) {
-    return num1*num2;
+    return num1 * num2;
 }
 
 function divide(num1, num2) {
     if (num2 == 0) {
-        alert("Error, you can't divide through 0");
-        return "Error";
+        return "Error, don't divide by 0!";
     } else {
-        return num1/num2;
+        return num1 / num2;
     }
 }
 
- //Basic variables for using the calculator
- let num1 = null;
- let num2 = null;
- let operator = null;
- let displayValue = "";
+//Basic variables for using the calculator
+let num1 = null;
+let num2 = null;
+let operator = null;
+let displayValue = "";
 
 //Function to operate the cakculator with the given input
 function operate(num1, num2, operator) {
-    switch(operator) {
+    switch (operator) {
         case "+":
-            return add(num1,num2);
-        case "-": 
+            return add(num1, num2);
+        case "-":
             return substract(num1, num2);
         case "*":
             return multiply(num1, num2);
@@ -50,7 +49,7 @@ function updateUI() {
     if (displayValue === "") {
         display.textContent = "0";
     } else {
-    display.textContent = displayValue; 
+        display.textContent = displayValue;
     }
 }
 
@@ -75,24 +74,37 @@ function addOperator() {
     const selectedOperator = this.value;
     if (num1 === null) {
         num1 = Number(displayValue);
-        operator = selectedOperator; 
+        operator = selectedOperator;
+        displayValue = "";
+    } else if (operator === null) {
+        operator = selectedOperator;
+        displayValue = "";
     } else {
         num2 = Number(displayValue);
         num1 = operate(num1, num2, operator);
+        displayValue = num1;
+        updateUI();
         operator = selectedOperator;
         num2 = null;
+        displayValue = "";
     }
-    displayValue = "";
-    updateUI();
 }
 
 const resultButton = document.querySelector("#result");
 resultButton.addEventListener("click", getResult);
 
 function getResult() {
-    num2 = Number(displayValue);
-    displayValue = operate(num1, num2, operator);
-    updateUI();
+    if (operator === null) {
+        //displayValue = ""; //Wenn noch kein Operator eingegeben wurde, aber mehrmals auf "=" geklickt wird, soll kein Ergebnis angezeigt werden
+    } else {
+        num2 = Number(displayValue);
+        displayValue = operate(num1, num2, operator);
+        num1 = Number(displayValue);
+        num2 = null;
+        operator = null;
+        updateUI();
+    }
+    
 }
 
 const clearButton = document.querySelector("#clear");
