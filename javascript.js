@@ -110,7 +110,7 @@ function getResult() {
         displayValue = displayValue; //Wenn noch kein Operator eingegeben wurde, aber mehrmals auf "=" geklickt wird, soll kein Ergebnis angezeigt werden
     } else {
         num2 = Number(displayValue);
-        displayValue = operate(num1, num2, operator);
+        displayValue = operate(num1, num2, operator).toFixed(10); //Round number to max. 10 Decimals
         num1 = Number(displayValue);
         updateUI();
         num2 = null;
