@@ -140,7 +140,20 @@ function addFloatingPoint() {
     if (displayValueArray.includes(".")) {
         this.disabled = true;
     } else {
-        displayValue += this.value;
+        if (displayValue === "") {
+            displayValue += ("0" + this.value);
+        } else {
+        displayValue += this.value; }
         updateUI();
     }
 }
+
+const backspaceButton = document.querySelector("#backspace");
+ backspaceButton.addEventListener("click", deleteLastNumber); 
+
+ function deleteLastNumber() {
+    let displayValueArray = displayValue.toString().split("");
+    displayValueArray.pop();
+    displayValue = displayValueArray.join("");
+    updateUI();
+ }
