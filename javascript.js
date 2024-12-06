@@ -63,7 +63,7 @@ function addNumberToDisplay() {
     const selectedNumber = this.value;
 
     if (num1 !== null && operator === null) {
-        num1 = null; // Zurücksetzen, um eine neue Rechnung zu starten
+        num1 = null; // Wenn ein Nutzer bereits ein Ergebnis hat, mit diesem aber nicht weiterrechnet (weil Operator null), dann setze die num1 wieder auf null)
     }
 
     displayValue += selectedNumber;
@@ -77,10 +77,12 @@ operatorButtons.forEach(operator => {
 
 function addOperator() {
     const selectedOperator = this.value;
-
+    
+    //If there is a number stored in num1, but the operator is null, because the user clicked on "=" before, store the selected operator and go on to get the second number
     if (num1 !== null && displayValue === "") {
         operator = selectedOperator;
-
+    
+    //If the user clicked twice on a operator, take the number on the display and store it to num2, get the result and store it to num1, show the result on the display and then store the selected operator to go on and get the next number
     } else if (num1 !== null && displayValue !== "") {
         num2 = Number(displayValue);
         num1 = operate(num1, num2, operator);
@@ -89,12 +91,15 @@ function addOperator() {
         operator = selectedOperator;
         num2 = null;
         displayValue = "";
-
+    
+    //If there is no number stored in num1, store it and set the selected operator (first round)
     } else {
         num1 = Number(displayValue);
         operator = selectedOperator;
         displayValue = "";
     }
+
+    floatingPointButton.disabled = false;
 }
 
 const resultButton = document.querySelector("#result");
@@ -112,7 +117,7 @@ function getResult() {
         operator = null;
         displayValue = ""; 
     }
-    
+    floatingPointButton.disabled = false;
 }
 
 const clearButton = document.querySelector("#clear");
@@ -123,19 +128,19 @@ function clearCalcuator() {
     num2 = null;
     operator = null;
     displayValue = "";
-    //floatingPointButton.disabled = false;
+    floatingPointButton.disabled = false;
     updateUI();
 }
 
-// const floatingPointButton = document.querySelector("#floating-point");
-// floatingPointButton.addEventListener("click", addFloatingPoint); 
+ const floatingPointButton = document.querySelector("#floating-point");
+ floatingPointButton.addEventListener("click", addFloatingPoint); 
 
-// function addFloatingPoint() {
-//     let displayValueArray = displayValue.toString().split("");
-//     if (displayValueArray.includes(".")) {
-//         this.disabled = true;
-//     } else {
-//         displayValue += this.value;
-//         updateUI();
-//     }
-// }
+function addFloatingPoint() {
+    let displayValueArray = displayValue.toString().split("");
+    if (displayValueArray.includes(".")) {
+        this.disabled = true;
+    } else {
+        displayValue += this.value;
+        updateUI();
+    }
+}
