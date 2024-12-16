@@ -110,7 +110,8 @@ function getResult() {
         displayValue = displayValue; //Wenn noch kein Operator eingegeben wurde, aber mehrmals auf "=" geklickt wird, soll kein Ergebnis angezeigt werden
     } else {
         num2 = Number(displayValue);
-        displayValue = operate(num1, num2, operator).toFixed(10); //Round number to max. 10 Decimals
+        displayValue = operate(num1, num2, operator); 
+        displayValue = Number(Number(displayValue).toFixed(10)); //Round number to max. 10 Decimals, and drop the unnessacary 0 (https://stackoverflow.com/a/63908798)
         num1 = Number(displayValue);
         updateUI();
         num2 = null;
@@ -119,6 +120,7 @@ function getResult() {
     }
     floatingPointButton.disabled = false;
 }
+
 
 const clearButton = document.querySelector("#clear");
 clearButton.addEventListener("click", clearCalcuator);
@@ -157,3 +159,17 @@ const backspaceButton = document.querySelector("#backspace");
     displayValue = displayValueArray.join("");
     updateUI();
  }
+
+ // Keyboard-Support
+
+ document.addEventListener("keydown", function(event) { 
+    console.log(event.key)
+   if (event.key == "Enter") {
+    resultButton.click();
+   }
+   else if(event.key === "1" || "2")
+   numberButtons.forEach(number => {
+    number.click();
+})
+ });
+
