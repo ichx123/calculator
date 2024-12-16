@@ -1,0 +1,144 @@
+/*Self-hosted GoogleFonts*/
+/* poppins-regular - latin */
+@font-face {
+    font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 400;
+    src: url('../fonts/poppins-v21-latin-regular.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+  }
+  /* poppins-italic - latin */
+  @font-face {
+    font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+    font-family: 'Poppins';
+    font-style: italic;
+    font-weight: 400;
+    src: url('../fonts/poppins-v21-latin-italic.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+  }
+  /* poppins-700 - latin */
+  @font-face {
+    font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 700;
+    src: url('../fonts/poppins-v21-latin-700.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+  }
+  /* poppins-700italic - latin */
+  @font-face {
+    font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+    font-family: 'Poppins';
+    font-style: italic;
+    font-weight: 700;
+    src: url('../fonts/poppins-v21-latin-700italic.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+  }
+
+  body {
+    font-family: 'Poppins', Arial, Helvetica, sans-serif;
+    margin: 20px;
+  }
+
+  .header {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    justify-content: center;
+  }
+
+  .container {
+    display: flex;
+    justify-content: center;
+  }
+
+  .calculator {
+    border: 3px solid black;
+    border-radius: 10px;
+    width: 80vw;
+    height: 80vw;
+    display: flex;
+    flex-direction: column;
+    margin-top: 40px;
+    margin-bottom: 60px;
+    gap: 10px;
+    padding: 10px;
+  }
+
+  .display {
+    background-color: #F3EBDE;
+    padding: 10px;
+    border-bottom: 1px solid black;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    box-shadow: 0 3px 3px 0;
+  }
+
+  .display p {
+    text-align: right;
+    font-size: 25px;
+    font-weight: bold;
+  }
+
+  .calc-row {
+    display: flex;
+    flex: 1;
+    gap: 10px;
+  }
+
+  .calc-row button {
+    flex: 1;
+    background-color: rgb(232, 237, 197, 0.8);
+    font-size: 20px;
+    font-weight: bold;
+    border-radius: 10px;
+    cursor: pointer;
+    border: none;
+    box-shadow: 0 3px 3px 0;
+  }
+
+  .calc-row button:hover {
+    background-color: rgb(232, 237, 197, 1);
+  }
+
+  .calc-row #clear {
+    flex: 2.15;
+    background-color: rgb(229, 231, 211, 0.8);
+    
+  }
+
+  .calc-row #clear:hover {
+    flex: 2.15;
+    background-color: rgb(229, 231, 211, 1);
+    
+  }
+
+  .calc-row #backspace {
+    background-color: rgb(229, 231, 211, 0.8);
+
+  }
+
+  .calc-row #backspace:hover {
+    background-color: rgb(229, 231, 211, 1);
+
+  }
+
+  .calc-row #result {
+    flex: 2.15;
+    background-color: rgb(185, 189, 165, 0.8);
+  }
+
+  .calc-row #result:hover {
+    flex: 2.15;
+    background-color: rgb(185, 189, 165, 1);
+  }
+
+  .calc-row .operator {
+    background-color: rgb(185, 189, 165, 0.8);
+  }
+
+  .calc-row .operator:hover {
+    background-color: rgb(185, 189, 165, 1);
+  }
+
+  .footer {
+    font-size: 13px;
+    text-align: center;
+  }
