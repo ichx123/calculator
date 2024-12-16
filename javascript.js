@@ -77,12 +77,12 @@ operatorButtons.forEach(operator => {
 
 function addOperator() {
     const selectedOperator = this.value;
-    
+
     //If there is a number stored in num1, but the operator is null, because the user clicked on "=" before, store the selected operator and go on to get the second number
     if (num1 !== null && displayValue === "") {
         operator = selectedOperator;
-    
-    //If the user clicked twice on a operator, take the number on the display and store it to num2, get the result and store it to num1, show the result on the display and then store the selected operator to go on and get the next number
+
+        //If the user clicked twice on a operator, take the number on the display and store it to num2, get the result and store it to num1, show the result on the display and then store the selected operator to go on and get the next number
     } else if (num1 !== null && displayValue !== "") {
         num2 = Number(displayValue);
         num1 = operate(num1, num2, operator);
@@ -91,8 +91,8 @@ function addOperator() {
         operator = selectedOperator;
         num2 = null;
         displayValue = "";
-    
-    //If there is no number stored in num1, store it and set the selected operator (first round)
+
+        //If there is no number stored in num1, store it and set the selected operator (first round)
     } else {
         num1 = Number(displayValue);
         operator = selectedOperator;
@@ -110,13 +110,13 @@ function getResult() {
         displayValue = displayValue; //Wenn noch kein Operator eingegeben wurde, aber mehrmals auf "=" geklickt wird, soll kein Ergebnis angezeigt werden
     } else {
         num2 = Number(displayValue);
-        displayValue = operate(num1, num2, operator); 
+        displayValue = operate(num1, num2, operator);
         displayValue = Number(Number(displayValue).toFixed(10)); //Round number to max. 10 Decimals, and drop the unnessacary 0 (https://stackoverflow.com/a/63908798)
         num1 = Number(displayValue);
         updateUI();
         num2 = null;
         operator = null;
-        displayValue = ""; 
+        displayValue = "";
     }
     floatingPointButton.disabled = false;
 }
@@ -134,8 +134,8 @@ function clearCalcuator() {
     updateUI();
 }
 
- const floatingPointButton = document.querySelector("#floating-point");
- floatingPointButton.addEventListener("click", addFloatingPoint); 
+const floatingPointButton = document.querySelector("#floating-point");
+floatingPointButton.addEventListener("click", addFloatingPoint);
 
 function addFloatingPoint() {
     let displayValueArray = displayValue.toString().split("");
@@ -145,31 +145,71 @@ function addFloatingPoint() {
         if (displayValue === "") {
             displayValue += ("0" + this.value);
         } else {
-        displayValue += this.value; }
+            displayValue += this.value;
+        }
         updateUI();
     }
 }
 
 const backspaceButton = document.querySelector("#backspace");
- backspaceButton.addEventListener("click", deleteLastNumber); 
+backspaceButton.addEventListener("click", deleteLastNumber);
 
- function deleteLastNumber() {
+function deleteLastNumber() {
     let displayValueArray = displayValue.toString().split("");
     displayValueArray.pop();
     displayValue = displayValueArray.join("");
     updateUI();
- }
+}
 
- // Keyboard-Support
+// Keyboard-Support
 
- document.addEventListener("keydown", function(event) { 
-    console.log(event.key)
-   if (event.key == "Enter") {
-    resultButton.click();
-   }
-   else if(event.key === "1" || "2")
-   numberButtons.forEach(number => {
-    number.click();
-})
- });
+document.addEventListener("keydown", function (event) {
+
+    // Maps keyboard-keys to the right function
+    const keyActions = {
+        Enter: () => resultButton.click(),
+        Backspace: () => backspaceButton.click(),
+        ",": () => floatingPointButton.click(),
+        Delete: () => clearButton.click(),
+        "+": () => clickOperator("+"),
+        "-": () => clickOperator("-"),
+        "*": () => clickOperator("*"),
+        "/": () => clickOperator("/"),
+        "0": () => clickNumber("0"),
+        "1": () => clickNumber("1"),
+        "2": () => clickNumber("2"),
+        "3": () => clickNumber("3"),
+        "4": () => clickNumber("4"),
+        "5": () => clickNumber("5"),
+        "6": () => clickNumber("6"),
+        "7": () => clickNumber("7"),
+        "8": () => clickNumber("8"),
+        "9": () => clickNumber("9")
+    };
+
+    // If there is a key-action mapped, use it
+    if (keyActions[event.key]) {
+        keyActions[event.key]();
+    }
+});
+
+// function for numbers
+function clickNumber(value) {
+    numberButtons.forEach(number => {
+        if (number.value === value) {
+            number.click();
+        }
+    });
+}
+
+// function for operators
+function clickOperator(value) {
+    operatorButtons.forEach(operator => {
+        if (operator.value === value) {
+            operator.click();
+        }
+    });
+}
+
+
 
